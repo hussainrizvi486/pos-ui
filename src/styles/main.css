@@ -169,17 +169,38 @@ body {
 
 .qty-input {
     display: flex;
-    width: 5rem;
-    /* border: 1px solid; */
+    width: 7rem;
+    gap: .5rem;
     align-items: center;
+    border: 1px solid lightgrey;
+    padding: .25rem .5rem;
+    border-radius: 1.5rem;
 }
 
 .qty-input input {
-    width: 100%;
+    width: 2rem;
+    text-align: center;
     border: none;
+    height: 100%;
+    padding: .25rem;
+    font-size: .875rem;
+    box-shadow: 0 0 2px #545454;
 }
 
 .qty-input button {
-    border: none !important;
-    background-color: transparent;
+    border: none;
+    height: 1.5rem;
+    width: 1.5rem;
+    background-color: #efefef;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1.5rem;
+    box-shadow: 0 0 2px #6c6c6c;
+    cursor: pointer;
+}
+
+.qty-input button svg {
+    height: 1rem;
+    width: 1rem;
 }
