@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 @import "utils.css";
+@import "animations.css";
+
 
 :root {
     --text-xs: .75rem;
@@ -10,6 +12,12 @@
     --text-xxl: 1.75rem;
     --text-3xl: 2rem;
     --text-4xl: 2.25rem;
+
+    --popover-bg: #FFF;
+    --popover-bg-hover: #ececec;
+    --popover-foreground: #000;
+    --popover-shadow: 0 4px 6px #0000001a, 0 2px 4px #0000000f;
+    --border-color: #666;
 }
 
 * {
@@ -203,4 +211,50 @@ body {
 .qty-input button svg {
     height: 1rem;
     width: 1rem;
+}
+
+
+.dialog-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 50;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.dialog-overlay[data-state="open"] {
+    animation: fade-in 0.3s ease-in-out;
+}
+
+.dialog-overlay[data-state="closed"] {
+    animation: fade-out 0.3s ease-in-out;
+}
+
+
+.dialog-content {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    z-index: 50;
+    display: grid;
+    width: 100%;
+    max-width: 40rem;
+    transform: translate(-50%, -50%);
+    gap: 1rem;
+    /* border: 1px solid var(--border-color); */
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+    transition-duration: 200ms;
+    border-radius: 0.5rem;
+    background-color: var(--popover-bg);
+}
+
+.dialog-content[data-state="open"] {
+    animation: fade-in 0.3s ease-in-out, zoom-in 0.3s ease-in-out, slide-in-from-left 0.3s ease-in-out, slide-in-from-top 0.3s ease-in-out;
+}
+
+.dialog-content[data-state="closed"] {
+    animation: fade-out 0.3s ease-in-out, zoom-out 0.3s ease-in-out, slide-out-to-left 0.3s ease-in-out, slide-out-to-top 0.3s ease-in-out;
 }

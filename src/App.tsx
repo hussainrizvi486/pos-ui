@@ -1,15 +1,63 @@
+
 import { AlignJustify, Minus, Plus, Search } from "lucide-react";
 import "./styles/main.css";
-// import { POSItemCard } from "@features/item/components";
-import { POSItemCard } from "./features/item/components";
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "./components/ui/accordion";
+import { DropdownMenu, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuContent } from "./components/ui/dropdown";
+import {
+  Dialog,
+  DialogPortal,
+  DialogOverlay,
+  DialogClose,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogFooter,
+  DialogTitle,
+  DialogDescription,
+} from "./components/ui/dialog";
+
 function POSApp() {
   return (
     <>
-      <div className="h-full">
+      <div className="h-full max-w-screen-xl	 mx-auto">
         <div className="app-container">
           <Header />
         </div>
-        <div className="app-container">
+        <Dialog>
+          <DialogTrigger asChild>
+            <a>Edit Profile</a>
+          </DialogTrigger>
+
+          <DialogContent className="">
+            <DialogHeader>
+              <DialogTitle>Edit profile</DialogTitle>
+              <DialogDescription>
+                Make changes to your profile here. Click save when you're done.
+              </DialogDescription>
+            </DialogHeader>
+
+
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat sapiente veniam non nemo fuga facilis odio voluptatibus corporis saepe ducimus!
+
+            <DialogFooter>
+              <button type="submit">Save changes</button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+
+        <br />
+        <br />
+
+        <Accordion type="single" collapsible>
+          <AccordionItem value="item-1">
+            <AccordionTrigger>Is it accessible?</AccordionTrigger>
+            <AccordionContent>
+              Yes. It adheres to the WAI-ARIA design pattern.
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+
+        {/* <div className="app-container">
           <div className="pos-home-page">
             <div className="pos-grid__wrapper">
               <div className="pos-items-grid">
@@ -22,17 +70,34 @@ function POSApp() {
             </div>
             <POSSummary />
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   )
 }
 
 const Header = () => {
+  // DropdownMenu, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuContent
   return (
     <header className="pos-header">
       <div className="menu-button">
         <AlignJustify />
+      </div>
+      <div>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild={true}>
+            <a href="#">User</a>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuItem>
+              <a href="#">Settings</a>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <a href="#">Logout</a>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+
       </div>
       <div className="search-box">
         <input type="text" placeholder="Search Item" className="search-box__input" />
