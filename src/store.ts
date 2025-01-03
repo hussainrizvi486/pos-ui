@@ -1,10 +1,14 @@
 import type { Action, ThunkAction } from '@reduxjs/toolkit'
 import { configureStore } from '@reduxjs/toolkit'
-// import counterReducer from '@/features/counter/counterSlice'
+import posSummarySlice from './features/pos/reducers/summary'
 
-export const store = configureStore({
-    reducer: {}
+const store = configureStore({
+    reducer: {
+        pos : posSummarySlice
+    }
 })
+
+export  default store;
 
 export type AppStore = typeof store
 export type RootState = ReturnType<AppStore['getState']>
