@@ -54,7 +54,7 @@ function POSApp() {
           <Header />
         </div>
         <ListView columns={columns} data={data} />
-        {/* <div className="app-container">
+        <div className="app-container hidden">
           <div className="flex gap-4" >
             <div className="flex-auto">
               <div className="grid gap-4 grid-cols-6">
@@ -74,7 +74,7 @@ function POSApp() {
               <POSSummary />
             </div>
           </div>
-        </div> */}
+        </div>
       </div>
     </div>
   );
