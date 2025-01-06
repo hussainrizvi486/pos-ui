@@ -1,5 +1,5 @@
 import { AlignJustify, Minus, Plus, Search } from "lucide-react";
-import "./styles/main.css";
+import "./index.css";
 import { POSItemCard } from "./features/item/components";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -9,6 +9,35 @@ import {
   getSummaryItems,
   getTotalCost
 } from "./features/pos/reducers/summary";
+import { ListView } from "./views/list";
+
+
+const data = [
+  { name: 'John', age: 30, location: 'New York' },
+  { name: 'Jane', age: 25, location: 'San Francisco' },
+];
+
+const columns = [
+  { header: 'Name', accessorKey: 'name' },
+  { header: 'Age', accessorKey: 'age' },
+  { header: 'Location', accessorKey: 'location' },
+];
+
+
+const tempColumns = [
+  {
+    header: 'First Name',
+    accessorKey: 'firstName',
+  },
+  {
+    header: 'Last Name',
+    accessorKey: 'lastName',
+  },
+  {
+    header: 'Age',
+    accessor: "age",
+  },
+]
 
 function POSApp() {
   const dispatch = useDispatch();
@@ -18,32 +47,43 @@ function POSApp() {
   }
 
   return (
-    <>
+
+    <div className="mx-auto max-w-[1200px]">
       <div className="h-full">
         <div className="app-container">
           <Header />
         </div>
-        <div className="app-container">
-          <div className="pos-home-page">
-            <div className="pos-grid__wrapper">
-              <div className="pos-items-grid">
-                <div onClick={handleAddItem}>
-                  <POSItemCard />
-                </div>
+        <ListView columns={columns} data={data} />
+        {/* <div className="app-container">
+          <div className="flex gap-4" >
+            <div className="flex-auto">
+              <div className="grid gap-4 grid-cols-6">
+                <POSItemCard />
+                <POSItemCard />
+                <POSItemCard />
+                <POSItemCard />
+                <POSItemCard />
+                <POSItemCard />
+                <POSItemCard />
+                <POSItemCard />
+                <POSItemCard />
+                <POSItemCard />
               </div>
             </div>
-            <POSSummary />
+            <div className="flex-shrink-0 bg-white p-3 rounded-md">
+              <POSSummary />
+            </div>
           </div>
-        </div>
+        </div> */}
       </div>
-    </>
+    </div>
   );
 }
 
 const Header = () => {
   return (
-    <header className="pos-header">
-      <div className="menu-button">
+    <header className="">
+      <div className="">
         <AlignJustify />
       </div>
       <div className="search-box">
@@ -63,26 +103,26 @@ interface SummaryItem {
 }
 
 const POSSummary = () => {
-  const summaryItems = useSelector(getSummaryItems);
+  const summaryItems: Array<SummaryItem> = useSelector(getSummaryItems);
   const totalCost = useSelector(getTotalCost);
 
   return (
-    <div className="pos-summary">
+    <div className="">
       <div className="font-bold text-center text-sm">Order Summary</div>
       <div className="pos-summary-items">
-        {summaryItems.map((item: SummaryItem, index) => (
-          <POSSummaryItem 
-            key={`${item.title}-${index}`} 
-            title={item.title} 
-            price={item.price} 
+        {summaryItems.map((item, index) => (
+          <POSSummaryItem
+            key={index}
+            title={item.title}
+            price={item.price}
           />
         ))}
       </div>
       <div className="pos-summary-detail"></div>
       <div className="pos-summary-actions">
         <div className="flex gap-1">
-          <button className="btn font-semibold btn-sm rounded">Save Order</button>
-          <button className="btn font-semibold btn-sm rounded">Cancel Order</button>
+          <button className="btn">Save Order</button>
+          <button className="btn">Cancel Order</button>
         </div>
         <div className="total-cost">
           Total Cost: ${totalCost.toFixed(2)}
@@ -99,8 +139,8 @@ const POSSummaryItem = ({ title, price }: Omit<SummaryItem, 'quantity'>) => {
   const quantity = item?.quantity || 0;
 
   const increaseItem = () => {
-    dispatch(updateItemQuantity({ 
-      title, 
+    dispatch(updateItemQuantity({
+      title,
       quantity: quantity + 1,
       oldQuantity: quantity
     }));
@@ -108,8 +148,8 @@ const POSSummaryItem = ({ title, price }: Omit<SummaryItem, 'quantity'>) => {
 
   const decreaseItem = () => {
     if (quantity > 1) {
-      dispatch(updateItemQuantity({ 
-        title, 
+      dispatch(updateItemQuantity({
+        title,
         quantity: quantity - 1,
         oldQuantity: quantity
       }));
@@ -132,18 +172,18 @@ const POSSummaryItem = ({ title, price }: Omit<SummaryItem, 'quantity'>) => {
         <button className="qty-btn" onClick={decreaseItem}>
           <Minus />
         </button>
-        <input 
-          type="text" 
-          value={quantity} 
+        <input
+          type="text"
+          value={quantity}
           className="input-qty"
-          readOnly 
+          readOnly
         />
         <button className="qty-btn" onClick={increaseItem}>
           <Plus />
         </button>
       </div>
       <button onClick={handleRemoveItem}>
-        x 
+        x
       </button>
     </div>
   );
