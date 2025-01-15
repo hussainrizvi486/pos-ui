@@ -10,24 +10,10 @@ import {
   getSortedRowModel,
 } from '@tanstack/react-table';
 
-interface ListViewProps<TData extends object> {
-  data: TData[];
-  columns: ColumnDef<TData>[];
-}
-[
-  {
-    header: 'First Name',
-    accessorKey: 'firstName',
-  },
-  {
-    header: 'Last Name',
-    accessorKey: 'lastName',
-  },
-  {
-    header: 'Age',
-    accessor: "age",
-  },
-]
+// import { } from "@components";
+
+
+
 const columnHelper = createColumnHelper();
 const tempData = [
   { name: 'John', age: 30, location: 'New York' },
@@ -39,6 +25,7 @@ interface DataTableProps<TData, TColumns> {
   columns: ColumnDef<TData, TColumns>,
   data: TData,
 }
+
 
 const tempColumns = [
   columnHelper.accessor("name", {
@@ -57,7 +44,9 @@ const tempColumns = [
 
 
 
-export const ListView = <TData extends object>({ data = tempData, columns = tempColumns }: ListViewProps<TData>) => {
+// DataTableProps
+
+export const ListView = <TData, TColumns extends object>({ data = tempData, columns = tempColumns }: DataTableProps<TData, TColumns>) => {
   const memoizedColumns = useMemo(() => columns, [columns]);
   const memoizedData = useMemo(() => data, [data]);
   const [sorting, setSorting] = useState<SortingState>([]);
@@ -87,10 +76,9 @@ export const ListView = <TData extends object>({ data = tempData, columns = temp
             {headerGroup.headers.map((header) => (
               <th
                 key={header.id}
-                className="px-4 pr-2 py-4 font-medium text-left"
+                className="px-2 py-2 font-medium text-left text-sm"
               >
-
-                <div>
+                <div className='flex items-center gap-1'>
                   {flexRender(
                     header.column.columnDef.header,
                     header.getContext()
@@ -114,14 +102,14 @@ export const ListView = <TData extends object>({ data = tempData, columns = temp
           </tr>
         ))}
 
-
-
       </thead>
       <tbody>
         {table.getRowModel().rows.map((row) => (
           <tr className="border-b" key={row.id}>
             {row.getVisibleCells().map((cell) => (
-              <td className="px-4 pt-[14px] pb-[18px]" key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>
+              <td
+              className="px-2 py-2 font-medium text-left text-sm"
+               key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>
             ))}
           </tr>
         ))}

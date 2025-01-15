@@ -2,9 +2,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from "./store";
 
 interface SummaryItem {
-    title: string;
+    item_name: string;
     price: number;
     quantity: number;
+    image?:string,
+    uom?:string
+    amount:number
 }
 
 interface POSState {
@@ -22,7 +25,7 @@ export const posSummarySlice = createSlice({
     initialState: initialState,
     reducers: {
         addItemToSummary: (state, action: PayloadAction<Omit<SummaryItem, 'quantity'>>) => {
-            const existingItem = state.summaryItems.find(item => item.title === action.payload.title);
+            const existingItem = state.summaryItems.find(item => item.id === action.payload.id);
             if (existingItem) {
                 existingItem.quantity += 1;
             } else {
@@ -30,9 +33,9 @@ export const posSummarySlice = createSlice({
             }
             state.totalCost += action.payload.price;
         },
-        updateItemQuantity: (state, action: PayloadAction<{ title: string; quantity: number; oldQuantity: number }>) => {
-            const { title, quantity, oldQuantity } = action.payload;
-            const item = state.summaryItems.find(item => item.title === title);
+        updateItemQuantity: (state, action: PayloadAction<{ id: string; quantity: number; oldQuantity: number }>) => {
+            const { id, quantity, oldQuantity } = action.payload;
+            const item = state.summaryItems.find(item => item.id === id);
             if (item) {
                 const priceDiff = item.price * (quantity - oldQuantity);
                 item.quantity = quantity;
@@ -40,10 +43,10 @@ export const posSummarySlice = createSlice({
             }
         },
         removeItem: (state, action: PayloadAction<string>) => {
-            const item = state.summaryItems.find(item => item.title === action.payload);
+            const item = state.summaryItems.find(item => item.id === action.payload);
             if (item) {
                 state.totalCost -= item.price * item.quantity;
-                state.summaryItems = state.summaryItems.filter(item => item.title !== action.payload);
+                state.summaryItems = state.summaryItems.filter(item => item.id !== action.payload);
             }
         }
     },
