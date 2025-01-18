@@ -10,6 +10,7 @@ import {
   getTotalCost,
 } from "../../features/pos/reducers/summary";
 
+import { Summary } from "./summary";
 import { useState } from "react";
 import { POSItemCard } from "../../features/item/components/POSItemCard";
 
@@ -177,26 +178,24 @@ export const tempItems = [
 ];
 
 export interface POSItem {
-    id: string;
-    item_name: string;
-    image?: string;
-    price: number;
-    category: string;
-    stock?: number;
-    has_varaints?: boolean
+  id: string;
+  item_name: string;
+  image?: string;
+  price: number;
+  category: string;
+  stock?: number;
+  has_varaints?: boolean;
 }
-
 
 const Page = () => {
   const [posItems, setPosItems] = useState(tempItems);
   const dispatch = useDispatch();
 
   return (
-    <div className="p-4">
-      <div className="grid grid-cols-10">
-
-        <div className="border col-span-7">
-          <div className="grid gap-4 grid-cols-5">
+    <div>
+      <div className="grid grid-cols-10 gap-2">
+        <div className="col-span-7">
+          <div className="grid gap-4 grid-cols-6 overflow-y-scroll h-[75vh] px-4">
             {posItems?.map((item, i) => (
               <div
                 key={i}
@@ -211,8 +210,7 @@ const Page = () => {
         </div>
 
         <div className="flex-shrink-0 bg-white p-3 rounded-md border  border-red-100 col-span-3">
-          {/* <POSSummary /> */}
-          <h1>Order Summary</h1>
+          <Summary />
         </div>
       </div>
     </div>

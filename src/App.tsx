@@ -195,7 +195,10 @@ function POSApp() {
 
   return (
     <div>
-      <Dialog>
+      <div className="border-b mb-4">
+        <Header />
+      </div>
+      {/* <Dialog>
         <DialogTrigger asChild>
           <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2">
             Open
@@ -205,9 +208,12 @@ function POSApp() {
           <DialogTitle className="text-lg font-semibold leading-none tracking-tight">
             POS Opening
           </DialogTitle>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dignissimos, suscipit. At necessitatibus perspiciatis maxime, sapiente provident in cum praesentium amet nulla ipsam corrupti facilis possimus qui, mollitia delectus fugit velit.
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dignissimos,
+          suscipit. At necessitatibus perspiciatis maxime, sapiente provident in
+          cum praesentium amet nulla ipsam corrupti facilis possimus qui,
+          mollitia delectus fugit velit.
         </DialogContent>
-      </Dialog>
+      </Dialog> */}
       <Routes>
         <Route path="/" element={<POSPage />} />
       </Routes>
@@ -247,18 +253,42 @@ function POSApp() {
 
 const Header = () => {
   return (
-    <header className="">
-      <div className="">
-        <AlignJustify />
+    <header className="flex items-center  justify-between px-6 py-4 ">
+      <div className="flex items-center gap-3">
+        <div className="">
+          <AlignJustify />
+        </div>
+        <div className="flex border items-center rounded-full p-2 px-4 w-96">
+          <input
+            type="text"
+            placeholder="Search Item"
+            className="w-100 outline-none bg-transparent flex-auto text-sm"
+          />
+          <div className="search-box_icon">
+            <Search />
+          </div>
+        </div>
       </div>
-      <div className="search-box">
-        <input
-          type="text"
-          placeholder="Search Item"
-          className="search-box__input"
-        />
-        <div className="search-box_icon">
-          <Search />
+
+      <div>
+        <div className="flex items-center gap-2">
+
+          <button
+            type="button"
+            className="relative flex rounded-full bg-gray-800 text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden"
+            id="user-menu-button"
+            aria-expanded="false"
+            aria-haspopup="true"
+          >
+            <span className="absolute -inset-1.5"></span>
+            <img
+              className="size-10 rounded-full"
+              src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80"
+              alt=""
+            />
+          </button>
+
+          <div className="text-sm"> John Hammand</div>
         </div>
       </div>
     </header>
