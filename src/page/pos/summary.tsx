@@ -10,9 +10,7 @@ interface POSItem {}
 
 export const Summary = () => {
   const POSSummary = useSelector(getPosSummary);
-  // console.log(POSSummary);
 
-  const summaryItems = [];
   return (
     <div>
       <div className="mb-4">
@@ -72,7 +70,6 @@ export const POSSummaryItem = ({ item }) => {
   };
 
   const handleUpdateQuantity = (type?: string | null) => {
-    console.log(type);
     dispatch(updateItemQuantity({ id: item.id, type: type }));
   };
 
